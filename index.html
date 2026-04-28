@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AGR Challenge -  تحدي الـ 50 كيلو جري</title>
+  <title>AGR Challenge - تحدي الـ 50 كيلو جري</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
     
@@ -38,6 +38,13 @@
       align-self: center;
     }
 
+    /* تأثير النبض لزر البداية */
+    @keyframes pulse-white {
+        0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+    }
+
     .start-btn { 
       background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 25%, #bdbdbd 50%, #e0e0e0 75%, #ffffff 100%);
       background-size: 200% auto;
@@ -46,6 +53,7 @@
       box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3); 
       transition: 0.5s;
       align-self: center;
+      animation: pulse-white 2s infinite;
     }
     
     .start-btn:hover { 
@@ -126,7 +134,7 @@
     <div class="form-section">
         <div class="input-wrapper full-width">
             <label>الاسم الرباعي (English Only)</label>
-            <input type="text" id="name" name="name" placeholder="Full Name in English" required>
+            <input type="text" id="name" name="name" placeholder="Full Name in English" required pattern="^[A-Za-z\s]*$">
         </div>
         <div class="input-wrapper">
             <label>تاريخ الميلاد</label>
@@ -146,7 +154,7 @@
         </div>
         <div class="input-wrapper">
             <label>رقم الواتساب</label>
-            <input type="tel" id="phone" name="phone" required placeholder="01xxxxxxxxx">
+            <input type="tel" id="phone" name="phone" required placeholder="01xxxxxxxxx" pattern="[0-9]{11}">
         </div>
 
         <div class="input-wrapper full-width">
@@ -166,7 +174,7 @@
 </main>
 
 <script>
-    // الرابط الخاص بك الذي قمت بإرساله
+    // تأكد من تحديث هذا الرابط عند عمل Deployment جديد
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwU-OgYcUPJyrjPVP6G2CUacSVUytRrsQvP2VxNuSyUtklXeGuOvOwHY4l_nafBalH9/exec';
 
     function showForm() {
@@ -181,29 +189,22 @@
     document.getElementById('directForm').onsubmit = function(e) {
         e.preventDefault();
         
-        const nameVal = document.getElementById('name').value;
-        const englishOnly = /^[A-Za-z\s]*$/;
-        
-        if (!englishOnly.test(nameVal)) {
-            alert("⚠️ يرجى تسجيل الاسم باللغة الإنجليزية فقط لضمان طباعة الشهادة بشكل صحيح.");
-            return false;
-        }
-
         const btn = document.getElementById('submitBtn');
         btn.disabled = true;
         btn.textContent = "جاري الحفظ في AGR...";
 
-        // إرسال البيانات إلى Google Sheets
+        // إرسال البيانات
         fetch(scriptURL, { 
             method: 'POST', 
             body: new FormData(this)
         })
         .then(response => {
-            alert("✅ تم التسجيل بنجاح في تحدي الـ 50 كيلو جري!.");
+            alert("✅ تم التسجيل بنجاح في تحدي الـ 50 كيلو جري!");
             window.location.reload();
         })
         .catch(error => {
-            alert("حدث خطأ في الإرسال، تأكد من اتصال الإنترنت وحاول مرة أخرى.");
+            console.error('Error!', error.message);
+            alert("حدث خطأ في الإرسال، يرجى التأكد من الرابط أو المحاولة لاحقاً.");
             btn.disabled = false;
             btn.textContent = "تأكيد الاشتراك";
         });
