@@ -3,157 +3,211 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zamalek 5K Run | AGR</title>
+  <title>AGR Challenge -  تحدي الـ 50 كيلو جري</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
     
     body { 
-      margin: 0; padding: 0; font-family: 'Cairo', sans-serif; color: #fff; text-align: center; 
-      /* استخدام صورة الخلفية من مجلد static */
-      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('static/background.jpg') no-repeat center center fixed; 
-      background-size: cover; 
+      margin: 0; padding: 0; font-family: 'Cairo', sans-serif; color: #f0f0f0; text-align: center; 
+      background: #000 url('static/bg.jpg') no-repeat center center fixed; 
+      background-size: cover; scroll-behavior: smooth; 
+    }
+    
+    header {
+      padding: 20px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
     }
 
-    header { padding: 30px 20px; background: rgba(46, 125, 50, 0.4); border-bottom: 3px solid #ccff00; }
-    
-    /* تنسيق اللوجو */
-    .logo { width: 120px; margin-bottom: 10px; }
+    .header-icons { 
+      width: 120px !important; 
+      height: auto !important; 
+      display: block;
+      margin: 10px 0;
+      transition: 0.3s;
+      align-self: flex-end; 
+    }
 
-    header h1 { font-size: 3em; margin: 0; color: #ccff00; text-shadow: 0 0 20px rgba(204, 255, 0, 0.5); font-weight: 900; }
-    
-    main { padding: 25px; backdrop-filter: blur(15px); background-color: rgba(0, 0, 0, 0.6); margin: 20px auto; border-radius: 30px; max-width: 800px; border: 1px solid rgba(255,255,255,0.1); }
-    
-    .details-box { text-align: right; margin-bottom: 30px; padding: 20px; background: rgba(255, 255, 255, 0.05); border-right: 6px solid #ccff00; border-radius: 15px; }
-    .agr-note { color: #ffeb3b; font-weight: bold; background: rgba(255, 235, 59, 0.15); padding: 15px; border-radius: 10px; margin-top: 15px; border: 2px dashed #ffeb3b; font-size: 1.1em; }
+    h1 { 
+      font-size: 1.8em; 
+      color: #ffffff; 
+      margin: 15px 0 30px 0; 
+      text-shadow: 0 0 15px #000, 0 0 25px #000, 0 0 35px #000; 
+      align-self: center;
+    }
 
-    .form-group { margin-bottom: 15px; }
+    .start-btn { 
+      background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 25%, #bdbdbd 50%, #e0e0e0 75%, #ffffff 100%);
+      background-size: 200% auto;
+      color: #000; padding: 14px 40px; font-size: 1.3em; font-weight: bold; 
+      border: 1px solid #ffffff; border-radius: 50px; cursor: pointer; 
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3); 
+      transition: 0.5s;
+      align-self: center;
+    }
+    
+    .start-btn:hover { 
+      background-position: right center; 
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5);
+    }
+
+    main { 
+      display: none; padding: 30px 25px; 
+      backdrop-filter: blur(5px); 
+      background-color: rgba(0, 0, 0, 0.6); 
+      margin: 10px auto 40px auto; 
+      border-radius: 20px; max-width: 650px; 
+      border: 1px solid rgba(255, 255, 255, 0.1); 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .challenge-title {
+      color: #fff;
+      font-size: 1.6em;
+      margin-bottom: 20px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 10px;
+      font-weight: 700;
+    }
+    
+    .details { 
+      text-align: right; margin-bottom: 25px; padding: 15px; 
+      border-right: 4px solid #ffffff; background-color: rgba(255, 255, 255, 0.03); 
+      font-size: 0.9em; line-height: 1.8;
+    }
+
+    .form-section { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+    .input-wrapper { width: 48%; display: flex; flex-direction: column; text-align: right; }
+    .full-width { width: 100%; }
+
+    label { font-weight: bold; margin-bottom: 6px; font-size: 0.85em; color: #e0e0e0; }
+    
     input, select { 
-      width: 90%; max-width: 400px; padding: 15px; border-radius: 12px; border: none; font-size: 1.1em; 
-      font-family: 'Cairo', sans-serif; background: #fff; color: #333; outline: none;
+      padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); 
+      background: rgba(255, 255, 255, 0.95); color: #000; 
+      width: 100%; box-sizing: border-box; 
+      font-family: 'Cairo', sans-serif; font-size: 0.95em; 
     }
-
-    h2 { color: #fff; margin-top: 30px; font-size: 1.8em; border-bottom: 2px solid #ccff00; display: inline-block; padding-bottom: 5px; }
-
-    .grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin: 25px 0; }
-    .card { 
-      cursor: pointer; background: rgba(255,255,255,0.08); border-radius: 20px; padding: 15px; 
-      width: 200px; border: 2px solid transparent; transition: 0.3s ease-in-out; text-align: center;
-    }
-    .card:hover { background: rgba(255,255,255,0.15); transform: translateY(-5px); }
-    .selected { border: 2px solid #ccff00 !important; background: rgba(204, 255, 0, 0.2) !important; }
     
-    .name { font-weight: 900; font-size: 1.3em; color: #ccff00; margin-bottom: 5px; }
-    .price { font-size: 1.1em; font-weight: bold; color: #fff; margin-bottom: 8px; }
-    .desc { font-size: 0.85em; color: #eee; line-height: 1.4; }
-
-    button { 
-      background-color: #ccff00; color: #000; font-weight: 900; cursor: pointer; 
-      width: 280px; padding: 15px; border-radius: 50px; border: none; transition: 0.3s; 
-      font-size: 1.4em; margin-top: 20px; box-shadow: 0 10px 20px rgba(204, 255, 0, 0.2);
+    button#submitBtn { 
+      background: linear-gradient(45deg, #a1a1a1, #555555); 
+      color: #fff; font-weight: bold; font-size: 1.2em; padding: 15px; 
+      border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; width: 100%; 
     }
-    button:hover { background-color: #e6ff80; transform: scale(1.05); }
-    button:disabled { background-color: #555; color: #888; cursor: not-allowed; }
+
+    @media (max-width: 650px) { 
+      .input-wrapper { width: 100%; } 
+      header { padding: 20px; }
+      .header-icons { align-self: center; margin: 10px auto; } 
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="static/logo.png" alt="AGR Logo" class="logo">
-  <h1>ZAMALEK 5K RUN</h1>
-  <p>سباق حديقة الأسماك بالزمالك</p>
+  <img src="static/logo.png" alt="AGR Logo" class="header-icons">
+  <h1>نظام التسجيل <span dir="ltr">AGR</span></h1>
+  <button id="startTrigger" class="start-btn" onclick="showForm()">ابدأ التسجيل الآن</button>
 </header>
 
-<main>
-  <div class="details-box">
-    <p>🏃 <strong>المسافة:</strong> 5 كيلو متر</p>
-    <p>📍 <strong>المكان:</strong> حديقة الأسماك - الزمالك</p>
-    <div class="agr-note">
-      🎁 سيتم توزيع هدايا مجانية للفائزين في الأنشطة الجانبية من صناعة AGR!
-    </div>
+<main id="registrationArea">
+  <h2 class="challenge-title">تحدي جري 50 كيلو 👟</h2>
+
+  <div class="details">
+    <strong>تعليمات الاشتراك:</strong>
+    <p>• الدفع متاح عبر (المحافظ الإلكترونية - انستا باي InstaPay).</p>
+    <p>• متاح شراء منتجات AGR منفردة خارج التحدي عبر الواتساب.</p>
+    <p>• <strong style="color: #fff;">تنبيه:</strong> يرجى تسجيل الاسم بالإنجليزية فقط لضمان دقة الشهادة.</p>
   </div>
 
-  <form id="regForm">
-    <div class="form-group"><input type="text" id="name" placeholder="الاسم بالكامل" required></div>
-    <div class="form-group"><input type="date" id="dob" required></div>
-    <div class="form-group">
-      <select id="gender" required>
-        <option value="">الجنس</option>
-        <option value="ذكر">ذكر</option>
-        <option value="أنثى">أنثى</option>
-      </select>
-    </div>
-    <div class="form-group"><input type="tel" id="phone" placeholder="رقم الموبايل (واتساب)" required></div>
+  <form id="directForm">
+    <div class="form-section">
+        <div class="input-wrapper full-width">
+            <label>الاسم الرباعي (English Only)</label>
+            <input type="text" id="name" name="name" placeholder="Full Name in English" required>
+        </div>
+        <div class="input-wrapper">
+            <label>تاريخ الميلاد</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+        <div class="input-wrapper">
+            <label>النوع</label>
+            <select id="gender" name="gender" required>
+                <option value="" style="color:#000;">اختر النوع...</option>
+                <option value="ذكر" style="color:#000;">ذكر</option>
+                <option value="أنثى" style="color:#000;">أنثى</option>
+            </select>
+        </div>
+        <div class="input-wrapper">
+            <label>المحافظة</label>
+            <input type="text" id="city" name="city" required placeholder="اكتب محافظتك">
+        </div>
+        <div class="input-wrapper">
+            <label>رقم الواتساب</label>
+            <input type="tel" id="phone" name="phone" required placeholder="01xxxxxxxxx">
+        </div>
 
-    <h2>اختر باقة الاشتراك</h2>
-    <div class="grid">
-      <div class="card" onclick="selectItem('package', 'Free', this)">
-        <div class="name">FREE</div>
-        <div class="price">مجاناً</div>
-        <div class="desc">المشاركة في السباق + شهادة مشاركة إلكترونية</div>
-      </div>
-      <div class="card" onclick="selectItem('package', 'Standard', this)">
-        <div class="name">STANDARD</div>
-        <div class="price">100 EGP</div>
-        <div class="desc">ميدالية السباق + شهادة مشاركة مطبوعة</div>
-      </div>
-      <div class="card" onclick="selectItem('package', 'Premium', this)">
-        <div class="name">PREMIUM</div>
-        <div class="price">350 EGP</div>
-        <div class="desc">تيشرت نص كم + ميدالية + شهادة مطبوعة</div>
-      </div>
+        <div class="input-wrapper full-width">
+            <label>باقة الاشتراك</label>
+            <select id="package" name="package" required style="color:#000;">
+                <option value="" style="color:#000;">اختر الباقة المناسبة</option>
+                <option value="s_100" style="color:#000;">ميدالية (100 ج.م)</option>
+                <option value="s_300" style="color:#000;">ميدالية + تيشرت (300 ج.م)</option>
+                <option value="s_450" style="color:#000;">ميدالية + حامل ميداليات (450 ج.م)</option>
+                <option value="s_600" style="color:#000;">ميدالية+تيشرت+حامل+كاب (600 ج.م)</option>
+                <option value="s_750" style="color:#000;">الباقة الشاملة (750 ج.م)</option>
+            </select>
+        </div>
     </div>
-
-    <input type="hidden" id="package" value="">
-    <button type="submit" id="submitBtn">تأكيد التسجيل</button>
+    <button type="submit" id="submitBtn">تأكيد الاشتراك</button>
   </form>
 </main>
 
 <script>
-let selectedPkgNode = null;
+    // الرابط الخاص بك الذي قمت بإرساله
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6JjL8jgggaQEk1VgGjOFmJQsRF3i-k4jZh9r86J8iTWxGg_qw8qKlr-_7wtpiLWLL/exec';
 
-function selectItem(type, value, element) {
-    document.getElementById(type).value = value;
-    if (selectedPkgNode) selectedPkgNode.classList.remove("selected");
-    element.classList.add("selected");
-    selectedPkgNode = element;
-}
+    function showForm() {
+        document.getElementById('registrationArea').style.display = 'block';
+        document.getElementById('startTrigger').style.display = 'none';
+        window.scrollTo({
+            top: document.getElementById('registrationArea').offsetTop - 20,
+            behavior: 'smooth'
+        });
+    }
 
-document.getElementById("regForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const btn = document.getElementById("submitBtn");
-  
-  if(!document.getElementById("package").value) {
-      alert("من فضلك اختر باقة الاشتراك أولاً");
-      return;
-  }
+    document.getElementById('directForm').onsubmit = function(e) {
+        e.preventDefault();
+        
+        const nameVal = document.getElementById('name').value;
+        const englishOnly = /^[A-Za-z\s]*$/;
+        
+        if (!englishOnly.test(nameVal)) {
+            alert("⚠️ يرجى تسجيل الاسم باللغة الإنجليزية فقط لضمان طباعة الشهادة بشكل صحيح.");
+            return false;
+        }
 
-  btn.innerText = "جاري الحفظ...";
-  btn.disabled = true;
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = "جاري الحفظ في AGR...";
 
-  const formData = new FormData();
-  formData.append("name", document.getElementById("name").value);
-  formData.append("dob", document.getElementById("dob").value);
-  formData.append("gender", document.getElementById("gender").value);
-  formData.append("phone", document.getElementById("phone").value);
-  formData.append("package", document.getElementById("package").value);
-
-  // الرابط الخاص بك مدمج هنا
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwjpoVcWsoVsct6aJ2I-GMISRkGTLjvxgPNsdDI5aXMl-TTo5Q95fbyv-dFzO3bBzBz_w/exec'; 
-
-  fetch(scriptURL, { method: 'POST', body: formData})
-    .then(response => {
-       alert("🎉 تم تسجيلك بنجاح! نراكم في حديقة الأسماك.");
-       document.getElementById("regForm").reset();
-       if(selectedPkgNode) selectedPkgNode.classList.remove("selected");
-       btn.innerText = "تأكيد التسجيل";
-       btn.disabled = false;
-    })
-    .catch(error => {
-       alert("عذراً، حدث خطأ. تأكد من اتصالك بالإنترنت.");
-       btn.disabled = false;
-       btn.innerText = "تأكيد التسجيل";
-    });
-});
+        // إرسال البيانات إلى Google Sheets
+        fetch(scriptURL, { 
+            method: 'POST', 
+            body: new FormData(this)
+        })
+        .then(response => {
+            alert("✅ تم التسجيل بنجاح في تحدي الـ 50 كيلو جري!.");
+            window.location.reload();
+        })
+        .catch(error => {
+            alert("حدث خطأ في الإرسال، تأكد من اتصال الإنترنت وحاول مرة أخرى.");
+            btn.disabled = false;
+            btn.textContent = "تأكيد الاشتراك";
+        });
+    };
 </script>
 </body>
 </html>

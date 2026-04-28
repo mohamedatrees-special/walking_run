@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGR Challenge -  تحدي الـ 50 كيلو جري</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    
+    body { 
+      margin: 0; padding: 0; font-family: 'Cairo', sans-serif; color: #f0f0f0; text-align: center; 
+      background: #000 url('static/bg.jpg') no-repeat center center fixed; 
+      background-size: cover; scroll-behavior: smooth; 
+    }
+    
+    header {
+      padding: 20px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .header-icons { 
+      width: 120px !important; 
+      height: auto !important; 
+      display: block;
+      margin: 10px 0;
+      transition: 0.3s;
+      align-self: flex-end; 
+    }
+
+    h1 { 
+      font-size: 1.8em; 
+      color: #ffffff; 
+      margin: 15px 0 30px 0; 
+      text-shadow: 0 0 15px #000, 0 0 25px #000, 0 0 35px #000; 
+      align-self: center;
+    }
+
+    .start-btn { 
+      background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 25%, #bdbdbd 50%, #e0e0e0 75%, #ffffff 100%);
+      background-size: 200% auto;
+      color: #000; padding: 14px 40px; font-size: 1.3em; font-weight: bold; 
+      border: 1px solid #ffffff; border-radius: 50px; cursor: pointer; 
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3); 
+      transition: 0.5s;
+      align-self: center;
+    }
+    
+    .start-btn:hover { 
+      background-position: right center; 
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5);
+    }
+
+    main { 
+      display: none; padding: 30px 25px; 
+      backdrop-filter: blur(5px); 
+      background-color: rgba(0, 0, 0, 0.6); 
+      margin: 10px auto 40px auto; 
+      border-radius: 20px; max-width: 650px; 
+      border: 1px solid rgba(255, 255, 255, 0.1); 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .challenge-title {
+      color: #fff;
+      font-size: 1.6em;
+      margin-bottom: 20px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 10px;
+      font-weight: 700;
+    }
+    
+    .details { 
+      text-align: right; margin-bottom: 25px; padding: 15px; 
+      border-right: 4px solid #ffffff; background-color: rgba(255, 255, 255, 0.03); 
+      font-size: 0.9em; line-height: 1.8;
+    }
+
+    .form-section { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+    .input-wrapper { width: 48%; display: flex; flex-direction: column; text-align: right; }
+    .full-width { width: 100%; }
+
+    label { font-weight: bold; margin-bottom: 6px; font-size: 0.85em; color: #e0e0e0; }
+    
+    input, select { 
+      padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); 
+      background: rgba(255, 255, 255, 0.95); color: #000; 
+      width: 100%; box-sizing: border-box; 
+      font-family: 'Cairo', sans-serif; font-size: 0.95em; 
+    }
+    
+    button#submitBtn { 
+      background: linear-gradient(45deg, #a1a1a1, #555555); 
+      color: #fff; font-weight: bold; font-size: 1.2em; padding: 15px; 
+      border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; width: 100%; 
+    }
+
+    @media (max-width: 650px) { 
+      .input-wrapper { width: 100%; } 
+      header { padding: 20px; }
+      .header-icons { align-self: center; margin: 10px auto; } 
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="static/logo.png" alt="AGR Logo" class="header-icons">
+  <h1>نظام التسجيل <span dir="ltr">AGR</span></h1>
+  <button id="startTrigger" class="start-btn" onclick="showForm()">ابدأ التسجيل الآن</button>
+</header>
+
+<main id="registrationArea">
+  <h2 class="challenge-title">تحدي جري 50 كيلو 👟</h2>
+
+  <div class="details">
+    <strong>تعليمات الاشتراك:</strong>
+    <p>• الدفع متاح عبر (المحافظ الإلكترونية - انستا باي InstaPay).</p>
+    <p>• متاح شراء منتجات AGR منفردة خارج التحدي عبر الواتساب.</p>
+    <p>• <strong style="color: #fff;">تنبيه:</strong> يرجى تسجيل الاسم بالإنجليزية فقط لضمان دقة الشهادة.</p>
+  </div>
+
+  <form id="directForm">
+    <div class="form-section">
+        <div class="input-wrapper full-width">
+            <label>الاسم الرباعي (English Only)</label>
+            <input type="text" id="name" name="name" placeholder="Full Name in English" required>
+        </div>
+        <div class="input-wrapper">
+            <label>تاريخ الميلاد</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+        <div class="input-wrapper">
+            <label>النوع</label>
+            <select id="gender" name="gender" required>
+                <option value="" style="color:#000;">اختر النوع...</option>
+                <option value="ذكر" style="color:#000;">ذكر</option>
+                <option value="أنثى" style="color:#000;">أنثى</option>
+            </select>
+        </div>
+        <div class="input-wrapper">
+            <label>المحافظة</label>
+            <input type="text" id="city" name="city" required placeholder="اكتب محافظتك">
+        </div>
+        <div class="input-wrapper">
+            <label>رقم الواتساب</label>
+            <input type="tel" id="phone" name="phone" required placeholder="01xxxxxxxxx">
+        </div>
+
+        <div class="input-wrapper full-width">
+            <label>باقة الاشتراك</label>
+            <select id="package" name="package" required style="color:#000;">
+                <option value="" style="color:#000;">اختر الباقة المناسبة</option>
+                <option value="s_100" style="color:#000;">ميدالية (100 ج.م)</option>
+                <option value="s_300" style="color:#000;">ميدالية + تيشرت (300 ج.م)</option>
+                <option value="s_450" style="color:#000;">ميدالية + حامل ميداليات (450 ج.م)</option>
+                <option value="s_600" style="color:#000;">ميدالية+تيشرت+حامل+كاب (600 ج.م)</option>
+                <option value="s_750" style="color:#000;">الباقة الشاملة (750 ج.م)</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" id="submitBtn">تأكيد الاشتراك</button>
+  </form>
+</main>
+
+<script>
+    // الرابط الخاص بك الذي قمت بإرساله
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6JjL8jgggaQEk1VgGjOFmJQsRF3i-k4jZh9r86J8iTWxGg_qw8qKlr-_7wtpiLWLL/exec';
+
+    function showForm() {
+        document.getElementById('registrationArea').style.display = 'block';
+        document.getElementById('startTrigger').style.display = 'none';
+        window.scrollTo({
+            top: document.getElementById('registrationArea').offsetTop - 20,
+            behavior: 'smooth'
+        });
+    }
+
+    document.getElementById('directForm').onsubmit = function(e) {
+        e.preventDefault();
+        
+        const nameVal = document.getElementById('name').value;
+        const englishOnly = /^[A-Za-z\s]*$/;
+        
+        if (!englishOnly.test(nameVal)) {
+            alert("⚠️ يرجى تسجيل الاسم باللغة الإنجليزية فقط لضمان طباعة الشهادة بشكل صحيح.");
+            return false;
+        }
+
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = "جاري الحفظ في AGR...";
+
+        // إرسال البيانات إلى Google Sheets
+        fetch(scriptURL, { 
+            method: 'POST', 
+            body: new FormData(this)
+        })
+        .then(response => {
+            alert("✅ تم التسجيل بنجاح في تحدي الـ 50 كيلو جري!.");
+            window.location.reload();
+        })
+        .catch(error => {
+            alert("حدث خطأ في الإرسال، تأكد من اتصال الإنترنت وحاول مرة أخرى.");
+            btn.disabled = false;
+            btn.textContent = "تأكيد الاشتراك";
+        });
+    };
+</script>
+</body>
+</html>
